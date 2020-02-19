@@ -6,6 +6,7 @@ Backend part.
 *latest ver. v 0.0.1*
 
 ## Used technologies
+
 - HTML 
 - CSS 
 - JS(ES6)
@@ -18,9 +19,6 @@ Backend part.
 ## Demo link
 
 https://ieffai.github.io/010__Mesto/
-
-# Демо
-https://kirpinev.github.io/mesto/
 
 ## Local deploy
 

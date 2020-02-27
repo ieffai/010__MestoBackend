@@ -18,7 +18,7 @@ Backend part.
 
 ## Demo link
 
-https://ieffai.github.io/010__Mesto/
+https://ieffai.github.io/Mesto_Backend/
 
 ## Local deploy
 

@@ -3,7 +3,7 @@
 Interactive page where you can add photos, delete them and to like them 
 Backend part.
  
-*latest ver. v 0.0.1*
+*latest ver. v 0.1.1*
 
 ## Used technologies
 
@@ -11,10 +11,13 @@ Backend part.
 - CSS 
 - JS(ES6)
 - node.js
-- express.js
+- express
 - BEM
 - API
 - Webpack
+- REST
+- MONGO
+- mongoose
 
 ## Demo link
 
@@ -31,8 +34,8 @@ https://ieffai.github.io/Mesto_Backend/
 
 ### TODOS
 
-- [ ] own db;
-- [ ] create user;
-- [ ] del user;
-- [ ] update user;
+- [X] own db;
+- [X] create user;
+- [X] del user;
+- [X] update user;
 - [ ] integrate pages routs. 

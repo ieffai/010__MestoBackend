@@ -1,20 +1,14 @@
-const express = require('express');
+const router = require('express').Router();
 
-const users = require('../data/users.json');
+const {
+  getUsers, getUser, createUser, updateProfile, changeAvatar, delUser,
+} = require('../controllers/users');
 
-const router = express.Router();
-// Get all users
-router.get('/', (req, res) => res.json(users));
-
-// Get user
-router.get('/:_id', (req, res) => {
-  // eslint-disable-next-line no-alert, no-underscore-dangle
-  const user = users.find((item) => item._id === req.params._id);
-  if (user) {
-    res.json(user);
-  } else {
-    res.status(404).json({ msg: 'Нет пользователя с таким id' });
-  }
-});
+router.get('/', getUsers);
+router.get('/:id', getUser);
+router.delete('/:id', delUser);
+router.post('/', createUser);
+router.patch('/me', updateProfile);
+router.patch('/me/avatar', changeAvatar);
 
 module.exports = router;

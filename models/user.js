@@ -7,9 +7,7 @@ const userSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 30,
     validate: {
-      validator: (v) => {
-        return stringValidator.test(v);
-      }
+      validator: (v) => stringValidator.test(v),
     },
     required: true,
   },
@@ -18,18 +16,14 @@ const userSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 30,
     validate: {
-      validator: (v) => {
-        return stringValidator.test(v);
-      }
+      validator: (v) => stringValidator.test(v),
     },
     required: true,
   },
   avatar: {
     type: String,
     validate: {
-      validator: (v) => {
-        return urlValidator.test(v);
-      }
+      validator: (v) => urlValidator.test(v),
     },
     required: true,
   },

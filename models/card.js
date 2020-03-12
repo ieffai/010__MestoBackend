@@ -8,18 +8,14 @@ const cardSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 30,
     validate: {
-      validator: (v) => {
-        return stringValidator.test(v);
-      }
+      validator: (v) => stringValidator.test(v),
     },
     required: true,
   },
   link: {
     type: String,
     validate: {
-      validator: (v) => {
-        return urlValidator.test(v);
-      }
+      validator: (v) => urlValidator.test(v),
     },
     required: true,
   },

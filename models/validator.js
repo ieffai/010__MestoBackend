@@ -3,4 +3,5 @@ const urlValidator = /http(s?):\/\/(www\.)?((\w|[a-яё]|-)+((\.(\w|[a-яё]|-)+
 
 module.exports = {
   stringValidator,
-  urlValidator }
+  urlValidator,
+};

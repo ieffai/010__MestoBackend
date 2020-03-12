@@ -24,4 +24,5 @@ app.use('/cards', cardsRouter);
 app.use('/', errorRouter);
 app.use(errorMiddleware);
 
+// eslint-disable-next-line no-console
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

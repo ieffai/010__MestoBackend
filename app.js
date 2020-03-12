@@ -2,10 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 const { logger, errorMiddleware, owner } = require('./middlewares/middlewares');
-const { usersRouter, cardsRouter, errorRouter } = require('./routes/routes');
+const { usersRouter, cardsRouter, errorRouter, signUpRouter } = require('./routes/routes');
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
@@ -21,7 +22,10 @@ app.use(owner);
 app.use(logger);
 app.use('/users', usersRouter);
 app.use('/cards', cardsRouter);
+app.use('/signup', signUpRouter);
 app.use('/', errorRouter);
+
+
 app.use(errorMiddleware);
 
 // eslint-disable-next-line no-console

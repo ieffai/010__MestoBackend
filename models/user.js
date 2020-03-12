@@ -1,23 +1,35 @@
 const mongoose = require('mongoose');
+const { stringValidator, urlValidator } = require('./validator');
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
     minlength: 2,
     maxlength: 30,
+    validate: {
+      validator: (v) => {
+        return stringValidator.test(v);
+      }
+    },
     required: true,
   },
   about: {
     type: String,
     minlength: 2,
     maxlength: 30,
+    validate: {
+      validator: (v) => {
+        return stringValidator.test(v);
+      }
+    },
     required: true,
   },
   avatar: {
     type: String,
     validate: {
-      validator: (link) => /http(s?):\/\/(www\.)?((\w|[a-яё]|-)+((\.(\w|[a-яё]|-)+){1,4})?\.(\w|[a-яё]|-)+)(:(\d{2,5}))?(\w|\/|\\)+#?/.test(link),
-      message: (props) => `${props.value} is not a valid URL!`,
+      validator: (v) => {
+        return urlValidator.test(v);
+      }
     },
     required: true,
   },

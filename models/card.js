@@ -1,28 +1,33 @@
 const mongoose = require('mongoose');
 
+const { stringValidator, urlValidator } = require('./validator');
+
 const cardSchema = new mongoose.Schema({
   name: {
     type: String,
     minlength: 2,
     maxlength: 30,
+    validate: {
+      validator: (v) => {
+        return stringValidator.test(v);
+      }
+    },
     required: true,
   },
   link: {
     type: String,
     validate: {
-      validator: (link) => /http(s?):\/\/(www\.)?((\w|[a-яё]|-)+((\.(\w|[a-яё]|-)+){1,4})?\.(\w|[a-яё]|-)+)(:(\d{2,5}))?(\w|\/|\\)+#?/.test(link),
-      message: (props) => `${props.value} is not a valid URL!`,
+      validator: (v) => {
+        return urlValidator.test(v);
+      }
     },
-    required: [true, 'URL required'],
+    required: true,
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
-  likes: [{
-    type: mongoose.Schema.Types.ObjectId,
-    default: [],
-  }],
+  likes: [String],
   createdAt: {
     type: Date,
     default: Date.now,

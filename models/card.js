@@ -9,6 +9,7 @@ const cardSchema = new mongoose.Schema({
     maxlength: 30,
     validate: {
       validator: (v) => stringValidator.test(v),
+      message: 'Неправильный формат ввода',
     },
     required: true,
   },
@@ -16,6 +17,7 @@ const cardSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator: (v) => urlValidator.test(v),
+      message: 'Неправильный формат ввода',
     },
     required: true,
   },

@@ -2,12 +2,7 @@ const User = require('../models/user');
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
-    .then((users) => {
-      if (users.length === 0) {
-        return next({ message: 'No any users was found' });
-      }
-      return res.send({ 'Users List': users });
-    })
+    .then((users) => res.send({ data: users }))
     .catch(() => next({ message: 'Can not get users' }));
 };
 
@@ -19,7 +14,10 @@ module.exports.getUser = (req, res, next) => {
       }
       return res.send({ message: `Good afternoon ${user.name}`, user });
     })
-    .catch(() => next({ message: 'Wrong user ID, check it and try again' }));
+    .catch((err) => next({
+      message: 'Wrong user ID, check it and try again',
+      status: err.name === 'CastError' ? 400 : 500,
+    }));
 };
 
 module.exports.createUser = (req, res, next) => {
@@ -44,16 +42,8 @@ module.exports.changeAvatar = (req, res, next) => {
     { avatar },
     { new: true, runValidators: true })
     .then((user) => res.send({ user, message: 'Avatar succesfully changed' }))
-    .catch(() => next({ message: 'Can not update avatar' }));
-};
-
-module.exports.delUser = (req, res, next) => {
-  User.findByIdAndRemove(req.params.id)
-    .then((user) => {
-      if (!user) {
-        return next({ status: 404, message: 'Can not find user with such ID' });
-      }
-      return res.send({ message: `Bye ${user.name}, we'll be miss you` });
-    })
-    .catch(() => next({ message: 'Wrong user ID, check it and try again' }));
+    .catch((err) => next({
+      message: 'Can not update avatar',
+      status: err.name === 'CastError' ? 400 : 500,
+    }));
 };

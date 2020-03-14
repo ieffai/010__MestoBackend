@@ -16,31 +16,18 @@ module.exports.getCards = (req, res, next) => {
     .catch(() => next({ message: 'Can\'t get card list' }));
 };
 
-module.exports.getCard = (req, res, next) => {
-  Card.findById(req.params.id)
-    .then((card) => {
-      if (!card) {
-        return next({ status: 404, message: 'Can not find card with such ID' });
-      }
-      return res.send({ data: card });
-    })
-    .catch((err) => next({
-      message: 'Wrong card ID, check it and try again',
-      status: err.name === 'CastError' ? 400 : 500,
-    }));
-};
 
 module.exports.delCard = (req, res, next) => {
-  Card.findByIdAndRemove(req.params.id)
+  Card.findOneAndRemove({ _id: req.params.id, owner: req.user._id })
     .then((card) => {
-      if (card.owner.toString() !== '5e69f33795048a31748fc7da') {
+      if (!card) {
         return next({ status: 403 });
       }
       return res.send({ message: `Card ${card.name.toUpperCase()} was succesfully deleted` });
     })
     .catch((err) => next({
       message: 'We can\'t delete your card',
-      status: err.name === 'CastError' ? 400 : 500,
+      status: err.name === 'CastError' ? 403 : 500,
     }));
 };
 

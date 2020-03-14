@@ -3,7 +3,7 @@ const User = require('../models/user');
 module.exports.getUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.send({ data: users }))
-    .catch(() => next({ message: 'Can not get users' }));
+    .catch((err) => next({ message: err.message }));
 };
 
 module.exports.getUser = (req, res, next) => {
@@ -15,7 +15,7 @@ module.exports.getUser = (req, res, next) => {
       return res.send({ message: `Good afternoon ${user.name}`, user });
     })
     .catch((err) => next({
-      message: 'Wrong user ID, check it and try again',
+      message: err.message,
       status: err.name === 'CastError' ? 400 : 500,
     }));
 };

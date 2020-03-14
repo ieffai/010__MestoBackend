@@ -5,7 +5,7 @@ module.exports.createCard = (req, res, next) => {
   Card.create({ name, link, owner: req.user._id })
     .then(() => res.send({ message: `Your card ${name.toUpperCase()} succesfully created`, name, link }))
     .catch((err) => next({
-      message: 'Can\'t create card',
+      message: err.message,
       status: err.name === 'ValidationError' ? 400 : 500,
     }));
 };
@@ -13,7 +13,7 @@ module.exports.createCard = (req, res, next) => {
 module.exports.getCards = (req, res, next) => {
   Card.find({})
     .then((cards) => res.send({ cardlist: cards }))
-    .catch(() => next({ message: 'Can\'t get card list' }));
+    .catch(() => next({}));
 };
 
 
@@ -26,7 +26,7 @@ module.exports.delCard = (req, res, next) => {
       return res.send({ message: `Card ${card.name.toUpperCase()} was succesfully deleted` });
     })
     .catch((err) => next({
-      message: 'We can\'t delete your card',
+      message: err.message,
       status: err.name === 'CastError' ? 403 : 500,
     }));
 };

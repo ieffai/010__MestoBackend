@@ -18,16 +18,22 @@ module.exports.getCards = (req, res, next) => {
 
 
 module.exports.delCard = (req, res, next) => {
-  Card.findOneAndRemove({ _id: req.params.id, owner: req.user._id })
-    .then((card) => {
-      if (!card) {
-        return next({ status: 403 });
+  Card.findOne({ _id: req.params.id })
+    .then((cardId) => {
+      if (!cardId) {
+        return next({ status: 404 });
       }
-      return res.send({ message: `Card ${card.name.toUpperCase()} was succesfully deleted` });
+      return Card.findOneAndRemove({ _id: req.params.id, owner: req.user._id })
+        .then((card) => {
+          if (!card) {
+            return next({ status: 403 });
+          }
+          return res.send({ message: `Card ${card.name.toUpperCase()} was succesfully deleted` });
+        });
     })
     .catch((err) => next({
       message: err.message,
-      status: err.name === 'CastError' ? 403 : 500,
+      status: err.name === 'CastError' ? 400 : 500,
     }));
 };
 

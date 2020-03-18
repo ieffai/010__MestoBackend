@@ -1,9 +1,10 @@
 const logger = require('./logger');
 const errorMiddleware = require('./error');
-const owner = require('./owner');
+const auth = require('./auth');
+
 
 module.exports = {
   logger,
   errorMiddleware,
-  owner,
+  auth,
 };

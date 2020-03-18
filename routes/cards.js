@@ -1,10 +1,13 @@
-const express = require('express');
+const router = require('express').Router();
 
-const cards = require('../data/cards.json');
+const {
+  createCard, getCards, delCard, like, dislike,
+} = require('../controllers/cards');
 
-const router = express.Router();
+router.get('/', getCards);
+router.delete('/:id', delCard);
+router.post('/', createCard);
+router.put('/:id/likes', like);
+router.delete('/:id/likes', dislike);
 
-
-//  Get all users
-router.get('/', (req, res) => res.json(cards));
 module.exports = router;

@@ -5,20 +5,17 @@ const cookieParser = require('cookie-parser');
 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+
+const { PORT, JWT_SECRET, DB_LINK } = require('./config');
 const { logger, errorMiddleware, auth } = require('./middlewares/middlewares');
 const { usersRouter, cardsRouter, errorRouter } = require('./routes/routes');
 const { login, createUser } = require('./controllers/users');
 
-mongoose.connect('mongodb://localhost:27017/mestodb', {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-});
+mongoose.connect(DB_LINK);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser('neponimauchtotutdoljnobyt'));
+app.use(cookieParser(JWT_SECRET));
 
 app.post('/signin', login);
 app.post('/signup', createUser);

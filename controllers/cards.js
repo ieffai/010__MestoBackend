@@ -41,14 +41,22 @@ module.exports.like = (req, res, next) => {
   Card.findByIdAndUpdate(req.params.id,
     { $addToSet: { likes: req.user._id } },
     { new: true })
+    .orFail(() => Error('Card not found'))
     .then((card) => res.send({ data: card }))
-    .catch(() => next({ message: 'Unable to like' }));
+    .catch((err) => next({
+      message: err.message,
+      status: err.message === 'Card not found' ? 404 : 500,
+    }));
 };
 
 module.exports.dislike = (req, res, next) => {
   Card.findByIdAndUpdate(req.params.id,
     { $pull: { likes: req.user._id } },
     { new: true })
+    .orFail(() => Error('Card not found'))
     .then((card) => res.send({ data: card }))
-    .catch(() => next({ message: 'Unable to dislike' }));
+    .catch((err) => next({
+      message: err.message,
+      status: err.message === 'Card not found' ? 404 : 500,
+    }));
 };

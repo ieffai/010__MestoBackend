@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const { ObjectId } = mongoose.Schema.Types;
+
 const { stringValidator, urlValidator } = require('./validator');
 
 const cardSchema = new mongoose.Schema({
@@ -25,7 +27,7 @@ const cardSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
-  likes: [String],
+  likes: [ObjectId],
   createdAt: {
     type: Date,
     default: Date.now,

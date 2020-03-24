@@ -5,6 +5,7 @@ const errorMessages = {
   400: 'Bad request, check input and try again',
   403: 'Sorry, you don\'t have permission for this action',
   404: 'No such file or directory',
+  409: 'DB Conflict',
 };
 
 // eslint-disable-next-line no-unused-vars
@@ -13,7 +14,7 @@ const errorMiddleware = (err, req, res, next) => {
   const message = err.message || errorMessages[status] || defaultErrorMessage;
   // eslint-disable-next-line no-console
   console.log(req.method, req.path, 'ERROR MIDDLEWARE WORKING');
-  res.status(status).send(message);
+  res.status(status).send({ message });
 };
 
 module.exports = errorMiddleware;

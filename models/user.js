@@ -46,6 +46,10 @@ const userSchema = new mongoose.Schema({
     minlength: 2,
     required: true,
     select: false,
+    validate: {
+      validator: () => Promise.resolve(false),
+      message: 'Pass validation failed'
+    }
   },
 });
 

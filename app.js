@@ -11,7 +11,11 @@ const { logger, errorMiddleware, auth } = require('./middlewares/middlewares');
 const { usersRouter, cardsRouter, errorRouter } = require('./routes/routes');
 const { login, createUser } = require('./controllers/users');
 
-mongoose.connect(DB_LINK);
+mongoose.connect(DB_LINK,  {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const { stringValidator, urlValidator } = require('./validator');
 
 const userSchema = new mongoose.Schema({
+
   name: {
     type: String,
     minlength: 2,
@@ -46,10 +47,6 @@ const userSchema = new mongoose.Schema({
     minlength: 2,
     required: true,
     select: false,
-    validate: {
-      validator: () => Promise.resolve(false),
-      message: 'Pass validation failed'
-    }
   },
 });
 

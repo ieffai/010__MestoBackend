@@ -66,13 +66,15 @@ module.exports.changeAvatar = (req, res, next) => {
     }));
 };
 
+const { JWT_SECRET } = require('../config');
+
 module.exports.login = (req, res) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        'neponimauchtotutdoljnobyt',
+        JWT_SECRET,
         { expiresIn: '7d' },
       );
       res
@@ -81,7 +83,7 @@ module.exports.login = (req, res) => {
           httpOnly: true,
           sameSite: true,
         })
-        .send({ token });
+        .send({ message: `Hi ${user.name}` });
     })
     .catch((err) => {
       res

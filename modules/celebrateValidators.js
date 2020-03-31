@@ -1,5 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
-const { stringValidator, urlValidator } = require('../models/validator');
+const { stringValidator, urlValidator, passValidator } = require('../models/validator');
 
 const signIn = celebrate({
   body: Joi.object().keys({
@@ -16,7 +16,7 @@ const signUp = celebrate({
       .max(30),
     avatar: Joi.string().pattern(new RegExp(urlValidator)).required(),
     email: Joi.string().required().email(),
-    password: Joi.string().required().min(2),
+    password: Joi.string().pattern(new RegExp(passValidator)).required().min(6),
   }),
 });
 

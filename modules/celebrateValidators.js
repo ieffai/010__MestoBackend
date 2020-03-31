@@ -16,7 +16,11 @@ const signUp = celebrate({
       .max(30),
     avatar: Joi.string().pattern(new RegExp(urlValidator)).required(),
     email: Joi.string().required().email(),
-    password: Joi.string().pattern(new RegExp(passValidator)).required().min(6),
+    password: Joi.string()
+      .pattern(new RegExp(passValidator))
+      .required()
+      .min(6)
+      .error(new Error('Password must contain at least 6 characters, one uppercase letter, one special character and one number')),
   }),
 });
 

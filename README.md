@@ -7,35 +7,34 @@ Backend part.
 
 ## Used technologies
 
-- HTML 
-- CSS 
-- JS(ES6)
-- node.js
-- express
-- BEM
-- API
+- HTML, CSS, JS 
+- REST, API, BEM
+- node.js, express 
 - Webpack
-- REST
-- MONGO
-- mongoose
+- MONGO, mongoose
 
-## Demo link
-
-https://ieffai.github.io/Mesto_Backend/
+## Links
+### BackEnd Api
+https://84.201.173.59
+http://api.olehadash.xyz/
+http://www.api.olehadash.xyz/
+### Frontend demo
+http://olehadash.xyz/
+http://www.olehadash.xyz/
 
 ## Local deploy
-
 1. Clone repository
 2. Install official node.js from here https://nodejs.org/en/
 3. npm init (entry point: app.js)
 4. npm install express
 5. npm install nodemon
-6. npm run start || npm run dev (hot reload)
+6. install the required dependencies
+7. npm run start || npm run dev (hot reload)
 
-### TODOS
+## Avaliable API functions
+POST: (/signin, /signup), (/cards)
+GET: (/cards, /cards/*possible_card_Id*), (/users, /users/*possible_user_Id*)
+PUT: (/cards/*possible_card_Id*/likes)
+PATCH: (/users/me, users/me/avatar)
+DELETE: (/cards), (/cards/*possible_card_Id*/likes)
 
-- [X] own db;
-- [X] create user;
-- [X] del user;
-- [X] update user;
-- [ ] integrate pages routs. 

@@ -1,10 +1,10 @@
-const logger = require('./logger');
+const { errorLogger, requestLogger } = require('./logger');
 const errorMiddleware = require('./error');
 const auth = require('./auth');
 
-
 module.exports = {
-  logger,
+  errorLogger,
+  requestLogger,
   errorMiddleware,
   auth,
 };
